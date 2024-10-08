@@ -50,13 +50,10 @@ const Login = () => {
           <Image source={require('@/assets/images/mince1.png')} resizeMode="cover" style={tw`mb-6`} />
           <View style={[tw`w-full flex flex-col gap-8 px-6`]}>
             <PoppinsSemibold style={tw`text-[#0A1027]`}>Welcome Back</PoppinsSemibold>
-            <FormInput placeholder="Phone number, email, or username" value={username} onChangeText={setUsername} />
+            <FormInput placeholder="email, or username" value={username} onChangeText={setUsername} />
             <FormInput placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry />
-            <PoppinText style={[tw`text-[#6B6B6B] text-[13px] pr-2`, { textAlign: 'right' }]}>
-              Forgot Password? <Text style={tw`text-[#5547D7]`}>Click Here</Text>
-            </PoppinText>
             <CustomButton title="Login" customStyles="bg-[#5547D7] w-full" customText="text-[#fff]" handlePress={handleLogin} />
-            <CustomButton title="Continue With Google" customStyles="bg-transparent border-2 border-[#CECACE] w-full" icon={require('@/assets/images/googleLogo.png')} customText="text-[#6B6B6B]" />
+            {/* <CustomButton title="Continue With Google" customStyles="bg-transparent border-2 border-[#CECACE] w-full" icon={require('@/assets/images/googleLogo.png')} customText="text-[#6B6B6B]" /> */}
             <PoppinText style={[tw`text-[#6B6B6B] text-[13px]`, { textAlign: 'center' }]}>
               Don’t have an account? <Link href="/register" style={tw`text-[#5547D7]`}><Text>Register here</Text></Link>
             </PoppinText>

@@ -11,7 +11,7 @@ type FormInputProps = {
 
 const FormInput: React.FC<FormInputProps> = ({ placeholder, value, onChangeText, secureTextEntry }) => {
   return (
-    <View style={tw`border-2 h-[53px] text-[13px] text-[#6B6B6B] border-[#CECACE] w-full py-2 px-4 focus:border-[#CECACE] rounded-[10px]`}>
+    <View style={tw`border-2 h-[53px] text-[13px] text-[#6B6B6B] border-[#CECACE] w-full py-1 px-3 focus:border-[#CECACE] rounded-[10px]`}>
       <TextInput
         placeholder={placeholder}
         placeholderTextColor="#6B6B6B"

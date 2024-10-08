@@ -9,7 +9,8 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { useColorScheme } from '@/components/useColorScheme';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
@@ -29,11 +30,11 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    MonoText:require('../assets/fonts/SpaceMono-Regular.ttf') ,
-    PoppinsMain:require('../assets/fonts/Poppins-Regular.ttf') ,
-    PoppinsSemibold:require('../assets/fonts/Poppins-SemiBold.ttf') ,
-    PoppinsBold:require('../assets/fonts/Poppins-Bold.ttf') ,
-    NunitoMain:require('../assets/fonts/Nunito-Regular.ttf')
+    MonoText: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    PoppinsMain: require('../assets/fonts/Poppins-Regular.ttf'),
+    PoppinsSemibold: require('../assets/fonts/Poppins-SemiBold.ttf'),
+    PoppinsBold: require('../assets/fonts/Poppins-Bold.ttf'),
+    NunitoMain: require('../assets/fonts/Nunito-Regular.ttf'),
   });
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
@@ -54,15 +55,26 @@ export default function RootLayout() {
   return <RootLayoutNav />;
 }
 
+const linking = {
+  prefixes: ['yourapp:/', 'https://yourapp.com'],
+  config: {
+    screens: {
+      Home: 'home',
+      Notification: 'notification', // Add routes for your screens
+      // Define other screens here
+    },
+  },
+};
+
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <Stack>
-      <Stack.Screen name='index' options={{ headerShown: false }} />
-      <Stack.Screen name='(auth)' options={{ headerShown: false }} />
-      <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-      <Stack.Screen name='(notify)' options={{ headerShown: false }} />
-    </Stack>
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(notify)" options={{ headerShown: false }} />
+      </Stack>
   );
 }

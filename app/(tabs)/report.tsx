@@ -44,7 +44,7 @@ export default function Report() {
         >
           <ScrollView style={tw`px-3`}>
             <View style={tw`bg-white rounded-xl p-6 px-4 text-sm text-black mb-4`}>
-              <PoppinText style={tw`text-[#6B6B6B] text-[15px]`}>
+              <PoppinText style={tw`text-[#6B6B6B] text-[14px]`}>
                 How would you describe the privacy issue you met or that occurred
               </PoppinText>
               <View style={tw`flex flex-col gap-6 bg-transparent py-4`}>
@@ -59,7 +59,7 @@ export default function Report() {
                   style={{ marginBottom: 15 }}
                 />
               </View>
-              <PoppinText style={tw`text-[#6B6B6B] text-[15px] pb-3`}>
+              <PoppinText style={tw`text-[#6B6B6B] text-[14px] pb-3`}>
                 If your answer was Others. Please explain in details
               </PoppinText>
               <TextInput

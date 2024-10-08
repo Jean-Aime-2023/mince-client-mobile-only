@@ -4,12 +4,13 @@ import data from '@/data/slides';
 import OnboardingItem from '@/components/Onboard/OnboardingItem';
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import registerNNPushToken from 'native-notify';
 
 const index = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const slideRef = useRef<FlatList<any>>(null);
-
+  registerNNPushToken(23941, 'oKwVgtvRMvhfVB8HDTra5z');
   const viewableItemsChanged = useRef(({ viewableItems }: any) => {
     setCurrentIndex(viewableItems[0].index);
   }).current;
