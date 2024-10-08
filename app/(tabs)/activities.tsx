@@ -66,6 +66,11 @@ const transactions = [
     amount: '-$150',
   },
 ];
+const transactionStyles = [
+  { iconColor: '#FFBB38', bgColor: '#FFF5D9' },
+  { iconColor: '#396AFF', bgColor: '#E7EDFF' },
+  { iconColor: '#16DBCC', bgColor: '#DCFAF8' },
+];
 export default function activities() {
   return (
     <>
@@ -102,37 +107,44 @@ export default function activities() {
                 Recent Transactions
               </PoppinsSemibold>
             <View style={tw`bg-white mb-5 rounded-xl px-4`}>
-              {transactions.map((transaction, index) => (
-                <View
-                  key={index}
-                  style={tw`flex-row items-center py-3 justify-between`}
-                >
-                  <View style={tw`flex-row gap-3`}>
+            {transactions.map((transaction, index) => {
+                  const { iconColor, bgColor } =
+                    transactionStyles[index % transactionStyles.length]; // Cycle through styles
+                  return (
                     <View
-                      style={tw`bg-[#E7EDFF] p-3 justify-center rounded-full`}
+                      key={index}
+                      style={[tw`flex-row items-center py-3 justify-between`]}
                     >
-                      <FontAwesome5
-                        name="money-bill-wave"
-                        size={24}
-                        color="#5547D7"
-                      />
+                      <View style={tw`flex-row gap-3`}>
+                        <View
+                          style={[
+                            tw`p-3 justify-center rounded-full`,
+                            { backgroundColor: bgColor },
+                          ]}
+                        >
+                          <FontAwesome5
+                            name="money-bill-wave"
+                            size={24}
+                            color={iconColor}
+                          />
+                        </View>
+                        <View style={tw`flex-col`}>
+                          <PoppinText style={tw`text-[#6B6B6B] text-[15px]`}>
+                            {transaction.name}
+                          </PoppinText>
+                          <PoppinText style={tw`text-[#5547D7]`}>
+                            {transaction.date}
+                          </PoppinText>
+                        </View>
+                      </View>
+                      <View>
+                        <PoppinText style={tw`text-[#FF4B4A]`}>
+                          {transaction.amount}
+                        </PoppinText>
+                      </View>
                     </View>
-                    <View style={tw`flex-col`}>
-                      <PoppinText style={tw`text-[#6B6B6B] text-[15px]`}>
-                        {transaction.name}
-                      </PoppinText>
-                      <PoppinText style={tw`text-[#5547D7]`}>
-                        {transaction.date}
-                      </PoppinText>
-                    </View>
-                  </View>
-                  <View>
-                    <PoppinText style={tw`text-[#FF4B4A]`}>
-                      {transaction.amount}
-                    </PoppinText>
-                  </View>
-                </View>
-              ))}
+                  );
+                })}
             </View>
           </View>
         </ScrollView>
