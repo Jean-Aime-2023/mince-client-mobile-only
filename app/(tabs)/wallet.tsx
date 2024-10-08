@@ -1,4 +1,12 @@
-import { View, Dimensions, ScrollView, Image, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Dimensions,
+  ScrollView,
+  Image,
+  Pressable,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import React, { useState } from 'react';
 import Header from '@/components/Header';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -8,6 +16,8 @@ import tw from 'twrnc';
 import FormInput from '@/components/Login/FormInput';
 import CustomButton from '@/components/CustomButton';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import cardImg from '@/assets/images/Mince Card.png';
+import { router } from 'expo-router';
 
 export default function Wallet() {
   // State for form inputs
@@ -33,11 +43,25 @@ export default function Wallet() {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
               >
-                <View style={tw`p-4`}>
+                {/* <View style={tw`p-4`}>
                   <Image source={img1} resizeMode="cover" />
                 </View>
                 <View style={tw`p-4`}>
                   <Image source={img1} resizeMode="cover" />
+                </View> */}
+                <View style={tw`p-4`}>
+                  <Image
+                    source={cardImg}
+                    resizeMode="cover"
+                    style={tw`rounded-xl`}
+                  />
+                </View>
+                <View style={tw`p-4`}>
+                  <Image
+                    source={cardImg}
+                    resizeMode="cover"
+                    style={tw`rounded-xl`}
+                  />
                 </View>
               </ScrollView>
             </View>
@@ -89,9 +113,16 @@ export default function Wallet() {
                   Advances Card settings
                 </PoppinsSemibold>
                 <View style={tw`flex-col gap-5 mt-3 bg-white p-4 rounded-xl`}>
-                  <TouchableOpacity style={tw`flex-row items-center gap-4`}>
+                  <TouchableOpacity
+                    style={tw`flex-row items-center gap-4`}
+                    onPressIn={() => router.push('/report')}
+                  >
                     <View style={tw`bg-[#FFF5D9] p-3 rounded-xl`}>
-                      <FontAwesome name="credit-card-alt" size={24} color="#FFBB38" />
+                      <FontAwesome
+                        name="credit-card-alt"
+                        size={24}
+                        color="#FFBB38"
+                      />
                     </View>
                     <View>
                       <PoppinText style={tw`text-[#6B6B6B] text-[16px]`}>

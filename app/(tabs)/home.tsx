@@ -18,6 +18,7 @@ import img3 from '@/assets/avatar/profile2.jpg';
 import img4 from '@/assets/avatar/profile3.jpg';
 import img5 from '@/assets/avatar/istockphoto-1146642361-612x612.jpg';
 import Feather from '@expo/vector-icons/Feather';
+import cardImg from '@/assets/images/Mince Card.png'
 
 const transactions = [
   {
@@ -98,12 +99,19 @@ export default function Home() {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
               >
-                <View style={tw`p-4`}>
+                {/* <View style={tw`p-4`}>
                   <Image source={img1} resizeMode="cover" />
+                </View> */}
+                <View style={tw`p-4`}>
+                  <Image source={cardImg} resizeMode="cover" style={tw`rounded-xl`} />
                 </View>
                 <View style={tw`p-4`}>
-                  <Image source={img1} resizeMode="cover" />
+                  <Image source={cardImg} resizeMode="cover" style={tw`rounded-xl`} />
                 </View>
+
+                {/* <View style={tw`p-4`}>
+                  <Image source={img1} resizeMode="cover" />
+                </View> */}
               </ScrollView>
             </View>
             <View style={tw`p-4`}>
