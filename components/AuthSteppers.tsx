@@ -17,7 +17,7 @@ const AuthSteppers = () => {
     pin: '',
     confirmPin: '',
   });
-  const [phone, setPhone] = useState<string>(''); // Fix for lastname
+  const [phone, setPhone] = useState<string>(''); 
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
   const [lastname, setLastname] = useState<string>('');
@@ -76,7 +76,12 @@ const AuthSteppers = () => {
     console.log('fall back password auth');
   };
 
-  const alertComponent = (title: string, mess: string | undefined, btnTxt: string, btnFunc: { (): void; (): void; }) => {
+  const alertComponent = (
+    title: string,
+    mess: string | undefined,
+    btnTxt: string,
+    btnFunc: { (): void; (): void }
+  ) => {
     return Alert.alert(title, mess, [
       {
         text: btnTxt,
@@ -177,37 +182,24 @@ const AuthSteppers = () => {
       firstname,
       lastname,
       email,
-      phone: '', // You may want to add phone input
+      phone,
       password,
       confirmPassword,
     };
-
-    console.log('User Input:');
-    console.log('Username:', requestBody.lastname);
-    console.log('Username:', requestBody.firstname);
-    console.log('Email:', requestBody.email);
-    console.log('Password:', requestBody.password); // Be cautious about logging passwords!
-
-    // Make the API call to register the user
-    try {
-      const response = await axios.post(
-          'https://mincetech-back.onrender.com/api/users/auth/register',
-          requestBody
-      );
   
-      console.log('Registration successful:', response.data);
+    console.log("Request Body:", requestBody); // Log the request body
+  
+    try {
+      const response = await axios.post('https://mincetech-back.onrender.com/api/users/auth/register', requestBody);
+      console.log("API Response:", response.data); // Log the response
       Alert.alert('Success', 'Account created successfully!');
-      
-      // Redirect to login or do something else
       router.push('/login');
-  } catch (error) {
-      console.error('Error registering user:', error);
-      Alert.alert(
-          'Registration Error',
-          'Failed to create account. Please try again.'
-      );
-  }  
+    } catch (error) {
+      console.log("Error details:", error.response ? error.response.data : error); // Log error details
+      Alert.alert('Registration Error', 'Failed to create account. Please try again.');
+    }
   };
+    
 
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -320,60 +312,109 @@ const AuthSteppers = () => {
           </View>
         </ProgressStep>
 
-        <ProgressStep label="Credentials" onSubmit={handleCreateAccount}>
+        <ProgressStep
+          label="Personal Info"
+          previousBtnTextStyle={buttonTextStyle}
+          previousBtnStyle={buttonStyle}
+          finishBtnText={'Submit'}
+          nextBtnTextStyle={buttonTextStyle}
+          nextBtnStyle={buttonStyle}
+          labelStyle={styles.labelText}
+          onSubmit={handleCreateAccount}
+        >
           <View
-            style={tw`bg-white p-4 py-7 rounded-xl border border-gray-200 flex-col gap-6`}
+            style={tw`text-[17px] bg-white p-4 py-7 rounded-xl border border-gray-200 flex-col gap-6`}
           >
             <View>
               <PoppinsSemibold style={[styles.labelText, tw`text-center pb-3`]}>
-                Almost Done!
+                Set up your account
               </PoppinsSemibold>
               <PoppinText style={tw`text-[#6B6B6B] text-center`}>
-                Fill out the form below to create your account
+                Enter your personal information to create your account.
               </PoppinText>
             </View>
 
-            <View style={[tw`w-full flex flex-col gap-4`]}>
+            <View>
+              <PoppinText>Firstname</PoppinText>
               <FormInput
-                placeholder="Firstname"
+                placeholder="Enter your firstname"
                 value={firstname}
-                onChangeText={setFirstname} // Correctly set firstname
-              />
-              <FormInput
-                placeholder="Lastname"
-                value={lastname}
-          
-                onChangeText={setLastname} // Correctly set lastname
-              />
-              <FormInput
-                placeholder="Email"
-                value={email}
-                onChangeText={setEmail}
-              />
-              <FormInput
-                placeholder="Phone"
-                value={phone}                
-                onChangeText={setPhone}
-              />
-              <FormInput
-                placeholder="Password"
-                value={password}            
-                onChangeText={setPassword}
-                secureTextEntry
-              />
-              <FormInput
-                placeholder="Confirm Password"
-                value={confirmPassword}                
-                onChangeText={setConfirmPassword}
-                secureTextEntry
+                onChangeText={setFirstname}
+                keyboardType="default"
+                secureTextEntry={false}
               />
             </View>
-            {/* <CustomButton
-              title="Continue With Google"
-              customStyles="bg-transparent border-2 border-[#CECACE] w-full"
-              icon={require('@/assets/images/googleLogo.png')}
-              customText="text-[#6B6B6B]"
-            /> */}
+
+            <View>
+              <PoppinText>Lastname</PoppinText>
+              <FormInput
+                placeholder="Enter your lastname"
+                value={lastname}
+                onChangeText={setLastname}
+                keyboardType="default"
+                secureTextEntry={false}
+              />
+            </View>
+
+            <View>
+              <PoppinText>Email</PoppinText>
+              <FormInput
+                placeholder="Enter your email"
+                value={email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+                secureTextEntry={false}
+              />
+            </View>
+
+            <View>
+              <PoppinText>Phone</PoppinText>
+              <FormInput
+                placeholder="Enter your mobile number"
+                value={phone}
+                onChangeText={setPhone}
+                keyboardType="phone-number"
+                secureTextEntry={false}
+              />
+            </View>
+
+            <View>
+              <PoppinText>Password</PoppinText>
+              <FormInput
+                placeholder="Enter your password"
+                value={password}
+                onChangeText={setPassword}
+                keyboardType="default"
+                secureTextEntry={!showPassword}
+                icon={
+                  <Ionicons
+                    name={showPassword ? 'eye' : 'eye-off'}
+                    size={20}
+                    color="gray"
+                    onPress={() => setShowPassword(!showPassword)}
+                  />
+                }
+              />
+            </View>
+
+            <View>
+              <PoppinText>Confirm Password</PoppinText>
+              <FormInput
+                placeholder="Confirm password"
+                value={confirmPassword}
+                onChangeText={setConfirmPassword}
+                keyboardType="default"
+                secureTextEntry={!showConfirmPassword}
+                icon={
+                  <Ionicons
+                    name={showConfirmPassword ? 'eye' : 'eye-off'}
+                    size={20}
+                    color="gray"
+                    onPress={() => setShowConfirmPassword(!showConfirmPassword)}
+                  />
+                }
+              />
+            </View>
           </View>
         </ProgressStep>
       </ProgressSteps>
