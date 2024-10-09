@@ -43,26 +43,26 @@ export default function Wallet() {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
               >
+                <View style={tw`p-4`}>
+                  <Image source={img1} resizeMode="cover" />
+                </View>
+                <View style={tw`p-4`}>
+                  <Image source={img1} resizeMode="cover" />
+                </View>
                 {/* <View style={tw`p-4`}>
-                  <Image source={img1} resizeMode="cover" />
+                  <Image
+                    source={cardImg}
+                    resizeMode="cover"
+                    style={tw`rounded-xl`}
+                  />
                 </View>
                 <View style={tw`p-4`}>
-                  <Image source={img1} resizeMode="cover" />
+                  <Image
+                    source={cardImg}
+                    resizeMode="cover"
+                    style={tw`rounded-xl`}
+                  />
                 </View> */}
-                <View style={tw`p-4`}>
-                  <Image
-                    source={cardImg}
-                    resizeMode="cover"
-                    style={tw`rounded-xl`}
-                  />
-                </View>
-                <View style={tw`p-4`}>
-                  <Image
-                    source={cardImg}
-                    resizeMode="cover"
-                    style={tw`rounded-xl`}
-                  />
-                </View>
               </ScrollView>
             </View>
             <View style={tw`p-4`}>
